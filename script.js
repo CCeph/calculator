@@ -73,7 +73,7 @@ function updateNumDisplay() {
 }
 
 function updateOperator() {
-    if (!(operator === undefined)) {
+    if (!(operator === undefined) && !(num2 === undefined)) {
         performOperatorCalc();
     }
     operator = this.id;
