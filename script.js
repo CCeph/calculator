@@ -1,3 +1,11 @@
+//Setting default values for the calculator.
+let num1 = undefined;
+let operator = undefined;
+let num2 = undefined;
+
+//The functions add, subtract, multiply, divide, and operate are
+//responsible for the mathematical logic of the calculator.
+
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -25,3 +33,27 @@ function operate(num1, operator, num2) {
             console.log("Error in 'operate' function logic.")
     }
 }
+
+//This function adds interactivity with the GUI calc buttons.
+
+function addButtonInteractivity() {
+    digits = document.querySelectorAll('.digit');
+    digits.forEach(digit => {
+        digit.addEventListener('click', updateNum);
+    });
+}
+
+function updateNum() {
+    if (operator === undefined) {
+        num1 === undefined ? num1 = this.id : num1 += this.id
+    } else {
+        num2 === undefined ? num2 = this.id : num2 += this.id
+    }
+    updateNumDisplay();
+}
+
+function updateNumDisplay() {
+    console.log("Work in progress")
+}
+
+addButtonInteractivity();
