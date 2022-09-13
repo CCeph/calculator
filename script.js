@@ -41,6 +41,12 @@ function addButtonInteractivity() {
     digits.forEach(digit => {
         digit.addEventListener('click', updateNum);
     });
+
+    //Another event listener for operators required
+
+    //Another event listener for equals
+
+    //Another event listener for AC
 }
 
 function updateNum() {
