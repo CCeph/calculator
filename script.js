@@ -59,7 +59,12 @@ function updateNum() {
 }
 
 function updateNumDisplay() {
-    console.log("Work in progress")
+    currentNumber = document.querySelector(".bottomDisplay");
+    if (operator === undefined) {
+        currentNumber.textContent = `${num1}`
+    } else {
+        currentNumber.textContent = `${num2}`
+    }
 }
 
 addButtonInteractivity();
