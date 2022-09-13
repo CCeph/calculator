@@ -49,7 +49,8 @@ function addButtonInteractivity() {
     });
 
     //Another event listener for equals
-
+    equalButton = document.querySelector('#equals');
+    equalButton.addEventListener('click', performEqualsCalc)
     //Another event listener for AC
 }
 
@@ -63,7 +64,7 @@ function updateNum() {
 }
 
 function updateNumDisplay() {
-    currentNumber = document.querySelector(".bottomDisplay");
+    let currentNumber = document.querySelector(".bottomDisplay");
     if (operator === undefined) {
         currentNumber.textContent = `${num1}`
     } else {
@@ -73,19 +74,34 @@ function updateNumDisplay() {
 
 function updateOperator() {
     if (!(operator === undefined)) {
-        performCalc();
+        performOperatorCalc();
     }
     operator = this.id;
     updateOperatorDisplay();
 }
 
 
-function performCalc() {
-    console.log("Work in progress");
+function performOperatorCalc() {
+    let result = operate(parseInt(num1), operator, parseInt(num2));
+    let currentEquation = document.querySelector(".topDisplay");
+    let currentNumber = document.querySelector('.bottomDisplay');
+    currentEquation.textContent = `${result} ${operator}`
+    currentNumber.textContent = `${result}`
+    num1 = result;
+    num2 = undefined;
 }
 
 function updateOperatorDisplay() {
-    currentEquation = document.querySelector(".topDisplay");
+    let currentEquation = document.querySelector(".topDisplay");
     currentEquation.textContent = `${num1} ${operator}`;
 }
+
+function performEqualsCalc() {
+    let result = operate(parseInt(num1), operator, parseInt(num2));
+    let currentEquation = document.querySelector(".topDisplay");
+    let currentNumber = document.querySelector('.bottomDisplay');
+    currentEquation.textContent = `${num1} ${operator} ${num2} =`
+    currentNumber.textContent = `${result}`
+}
+
 addButtonInteractivity();
