@@ -43,6 +43,10 @@ function addButtonInteractivity() {
     });
 
     //Another event listener for operators required
+    operators = document.querySelectorAll('.operator')
+    operators.forEach(operateSign => {
+        operateSign.addEventListener('click', updateOperator)
+    });
 
     //Another event listener for equals
 
@@ -67,4 +71,21 @@ function updateNumDisplay() {
     }
 }
 
+function updateOperator() {
+    if (!(operator === undefined)) {
+        performCalc();
+    }
+    operator = this.id;
+    updateOperatorDisplay();
+}
+
+
+function performCalc() {
+    console.log("Work in progress");
+}
+
+function updateOperatorDisplay() {
+    currentEquation = document.querySelector(".topDisplay");
+    currentEquation.textContent = `${num1} ${operator}`;
+}
 addButtonInteractivity();
