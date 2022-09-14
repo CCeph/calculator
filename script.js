@@ -120,6 +120,11 @@ function updateOperatorDisplay(reset) {
 }
 
 function performEqualsCalc() {
+    if ((operator === undefined) || (num2 === undefined)) {
+        console.log("Error in performEquals");
+        return;
+    }
+    
     let result = operate(parseInt(num1), operator, parseInt(num2));
     let currentEquation = document.querySelector(".topDisplay");
     let currentNumber = document.querySelector('.bottomDisplay');
