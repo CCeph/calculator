@@ -2,6 +2,7 @@
 let num1 = undefined;
 let operator = undefined;
 let num2 = undefined;
+let activeResult = undefined;
 
 //The functions add, subtract, multiply, divide, and operate are
 //responsible for the mathematical logic of the calculator.
@@ -51,10 +52,20 @@ function addButtonInteractivity() {
     //Another event listener for equals
     equalButton = document.querySelector('#equals');
     equalButton.addEventListener('click', performEqualsCalc)
+
     //Another event listener for AC
+    clearButton = document.querySelector('#AC');
+    clearButton.addEventListener('click', clear);
+    
 }
 
 function updateNum() {
+    if (!(activeResult === undefined)) {
+        clear();
+        let reset = true;
+        updateOperatorDisplay(reset);
+    }
+
     if (operator === undefined) {
         num1 === undefined ? num1 = this.id : num1 += this.id
     } else {
@@ -63,8 +74,14 @@ function updateNum() {
     updateNumDisplay();
 }
 
-function updateNumDisplay() {
+function updateNumDisplay(reset) {
     let currentNumber = document.querySelector(".bottomDisplay");
+
+    if (reset === true) {
+        currentNumber.textContent = ' ';
+        return;
+    }
+
     if (operator === undefined) {
         currentNumber.textContent = `${num1}`
     } else {
@@ -91,8 +108,14 @@ function performOperatorCalc() {
     num2 = undefined;
 }
 
-function updateOperatorDisplay() {
+function updateOperatorDisplay(reset) {
     let currentEquation = document.querySelector(".topDisplay");
+
+    if (reset === true) {
+        currentEquation.textContent = ` `;
+        return;
+    }
+
     currentEquation.textContent = `${num1} ${operator}`;
 }
 
@@ -102,6 +125,18 @@ function performEqualsCalc() {
     let currentNumber = document.querySelector('.bottomDisplay');
     currentEquation.textContent = `${num1} ${operator} ${num2} =`
     currentNumber.textContent = `${result}`
+    activeResult = result
+}
+
+function clear() {
+    num1 = undefined;
+    operator = undefined;
+    num2 = undefined;
+    activeResult = undefined;
+    let reset = true;
+
+    updateNumDisplay(reset);
+    updateOperatorDisplay(reset);
 }
 
 addButtonInteractivity();
