@@ -36,7 +36,6 @@ function operate(num1, operator, num2) {
 }
 
 //This function adds interactivity with the GUI calc buttons.
-
 function addButtonInteractivity() {
     digits = document.querySelectorAll('.digit');
     digits.forEach(digit => {
@@ -59,6 +58,7 @@ function addButtonInteractivity() {
     
 }
 
+//This function is called when a number button is pressed.
 function updateNum() {
     if (!(activeResult === undefined)) {
         clear();
@@ -74,6 +74,7 @@ function updateNum() {
     updateNumDisplay();
 }
 
+//This function updates the display of the calculator when a number button is pressed.
 function updateNumDisplay(reset) {
     let currentNumber = document.querySelector(".bottomDisplay");
 
@@ -89,6 +90,9 @@ function updateNumDisplay(reset) {
     }
 }
 
+//This function is called when an operator button is pressed. It is supposed to update
+//the operator in the script and call the necessary functions to handle the
+//logic or display.
 function updateOperator() {
     if (!(operator === undefined) && !(num2 === undefined)) {
         performOperatorCalc();
@@ -97,7 +101,8 @@ function updateOperator() {
     updateOperatorDisplay();
 }
 
-
+//This function performs the calculation and displays the result if an operator button
+//is pressed when num1, operator, and num2 are all present.
 function performOperatorCalc() {
     let result = operate(parseInt(num1), operator, parseInt(num2));
     let currentEquation = document.querySelector(".topDisplay");
@@ -108,6 +113,7 @@ function performOperatorCalc() {
     num2 = undefined;
 }
 
+//This function updates the display with the selected operator.
 function updateOperatorDisplay(reset) {
     let currentEquation = document.querySelector(".topDisplay");
 
@@ -119,6 +125,7 @@ function updateOperatorDisplay(reset) {
     currentEquation.textContent = `${num1} ${operator}`;
 }
 
+//This function performs the calculation and presents the result when equals is pressed.
 function performEqualsCalc() {
     if ((operator === undefined) || (num2 === undefined)) {
         console.log("Error in performEquals");
@@ -133,6 +140,7 @@ function performEqualsCalc() {
     activeResult = result
 }
 
+//This function resets the calculator.
 function clear() {
     num1 = undefined;
     operator = undefined;
