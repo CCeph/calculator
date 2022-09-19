@@ -96,8 +96,7 @@ function updateNumDisplay(reset) {
 function updateOperator() {
     if (!(operator === undefined) && !(num2 === undefined)) {
         /*performOperatorCalc will conduct the operation.
-        //errorStatus is a variable used as a flag for
-        validation.*/
+        errorStatus is a variable used as a flag for validation.*/
         let errorStatus = performOperatorCalc();
 
         //This checks if the calculation returned an error
