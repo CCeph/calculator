@@ -95,7 +95,16 @@ function updateNumDisplay(reset) {
 //logic or display.
 function updateOperator() {
     if (!(operator === undefined) && !(num2 === undefined)) {
-        performOperatorCalc();
+        /*performOperatorCalc will conduct the operation.
+        //errorStatus is a variable used as a flag for
+        validation.*/
+        let errorStatus = performOperatorCalc();
+
+        //This checks if the calculation returned an error
+        //and hence it needs to break.
+        if (errorStatus === true) {
+            return;
+        }
     }
     operator = this.id;
     updateOperatorDisplay();
@@ -104,6 +113,13 @@ function updateOperator() {
 //This function performs the calculation and displays the result if an operator button
 //is pressed when num1, operator, and num2 are all present.
 function performOperatorCalc() {
+    //Handles the case of anything divided by 0
+    if (operator === "/" && num2 === "0") {
+        triggerMathError();
+        displayMathError();
+        return true;
+    }
+
     let result = operate(parseInt(num1), operator, parseInt(num2));
     let currentEquation = document.querySelector(".topDisplay");
     let currentNumber = document.querySelector('.bottomDisplay');
@@ -111,6 +127,7 @@ function performOperatorCalc() {
     currentNumber.textContent = `${result}`
     num1 = result;
     num2 = undefined;
+    return false;
 }
 
 //This function updates the display with the selected operator.
@@ -127,6 +144,13 @@ function updateOperatorDisplay(reset) {
 
 //This function performs the calculation and presents the result when equals is pressed.
 function performEqualsCalc() {
+    //Handles the case of anything divided by 0
+    if (operator === "/" && num2 === "0") {
+        triggerMathError();
+        displayMathError();
+        return;
+    }
+    
     if ((operator === undefined) || (num2 === undefined)) {
         console.log("Error in performEquals");
         return;
@@ -150,6 +174,22 @@ function clear() {
 
     updateNumDisplay(reset);
     updateOperatorDisplay(reset);
+}
+
+//This function will trigger a math error in the calculator by setting num1, operator
+//and num2 to "mathError".
+function triggerMathError() {
+    num1 = undefined;
+    operator = undefined;
+    num2 = undefined;
+}
+
+//This function will display the Math Error message on the calculator.
+function displayMathError() {
+    let topDisplay = document.querySelector(".topDisplay");
+    let bottomDisplay = document.querySelector('.bottomDisplay');
+    topDisplay.textContent = ``
+    bottomDisplay.textContent = `Math Error`
 }
 
 addButtonInteractivity();
